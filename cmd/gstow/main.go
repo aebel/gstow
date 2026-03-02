@@ -10,6 +10,8 @@ import (
 	"github.com/aebel/gstow/internal/stow"
 )
 
+var version = "dev"
+
 var (
 	flagDir      = flag.String("d", "", "stow directory (default: current directory)")
 	flagTarget   = flag.String("t", "", "target directory")
@@ -17,6 +19,7 @@ var (
 	flagRestow   = flag.Bool("R", false, "restow (unstow then stow again)")
 	flagSimulate = flag.Bool("n", false, "simulate; don't make any changes")
 	flagVerbose  = flag.Bool("v", false, "verbose output")
+	flagVersion  = flag.Bool("V", false, "show version")
 	flagHelp     = flag.Bool("h", false, "show help")
 )
 
@@ -34,6 +37,11 @@ func usage() {
 func main() {
 	flag.Usage = usage
 	flag.Parse()
+
+	if *flagVersion {
+		fmt.Println(version)
+		os.Exit(0)
+	}
 
 	if *flagHelp {
 		usage()
